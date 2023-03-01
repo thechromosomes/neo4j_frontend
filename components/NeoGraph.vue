@@ -1,6 +1,6 @@
 <template>
   <div class="neo4j_graph">
-    <cytoscape ref="cy" :config="config">
+    <cytoscape ref="cy" :config="config" >
       <cy-element
         v-for="def in data"
         :key="`${def.data.id}`"
@@ -49,8 +49,9 @@ export default {
               width: 3,
               "line-color": "#ccc",
               "target-arrow-color": "#ccc",
+              "curve-style": "bezier",
               "target-arrow-shape": "triangle",
-              label: "Mgr",
+              "label": "Mgr",
             },
           },
         ],
@@ -64,3 +65,4 @@ export default {
   },
 };
 </script>
+

@@ -104,6 +104,8 @@ export default {
 
           this.elements = temp;
           this.dropDownElem = temp.map((e) => e.data.name);
+          this.dropDownElem.push("None");
+
           this.showGraph = true;
         }
       } catch (error) {
@@ -112,22 +114,26 @@ export default {
     },
     async filterUser() {
       try {
-        let response = await this.$store.dispatch("ApiCall", {
-          method: "post",
-          url: `get-all-by-name`,
-          params: {
-            name: this.selectedUser,
-          },
-        });
-        if (response) {
-          let temp = response.data.map((e) => {
-            return {
-              position: { x: Math.random() * 500, y: Math.random() * 500 },
-              data: e.data,
-            };
+        if (!this.selectedUser) return;
+        if (this.selectedUser === "None") {
+          this.getAllUser();
+        } else {
+          let response = await this.$store.dispatch("ApiCall", {
+            method: "post",
+            url: `get-all-by-name`,
+            params: {
+              name: this.selectedUser,
+            },
           });
-          this.elements = temp;
-          console.log("elements", response);
+          if (response) {
+            let temp = response.data.map((e) => {
+              return {
+                position: { x: Math.random() * 500, y: Math.random() * 500 },
+                data: e.data,
+              };
+            });
+            this.elements = temp;
+          }
         }
       } catch (error) {
         console.log("error", error);
