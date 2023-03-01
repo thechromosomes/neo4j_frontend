@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="9">
+      <v-col :cols="12" :md="6" :lg="9" id="my-custom-col">
         <v-btn color="primary" dark @click="renderDialog('employee')">
           Add Employee</v-btn
         >
@@ -10,7 +10,7 @@
           Add Manger</v-btn
         >
       </v-col>
-      <v-col cols="3">
+      <v-col :cols="12" :md="6" :lg="3">
         <v-select
           @input="filterUser"
           :items="dropDownElem"
@@ -20,7 +20,6 @@
           item-text="data.name"
           :filter="customFilter"
           :search-input.sync="search"
-          outlined
         />
       </v-col>
     </v-row>
@@ -145,3 +144,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+@media (max-width: 767px) {
+  #my-custom-col {
+    text-align: center;
+    justify-content: center;
+  }
+}
+</style>
